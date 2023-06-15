@@ -1,0 +1,76 @@
+{
+  "name": "@shopify/cli-hydrogen",
+  "publishConfig": {
+    "access": "public",
+    "@shopify:registry": "https://registry.npmjs.org"
+  },
+  "version": "5.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsup --clean --config ./tsup.config.ts && oclif manifest",
+    "dev": "tsup --watch --config ./tsup.config.ts",
+    "typecheck": "tsc --noEmit",
+    "generate:manifest": "oclif manifest",
+    "test": "cross-env SHOPIFY_UNIT_TEST=1 vitest run",
+    "test:watch": "cross-env SHOPIFY_UNIT_TEST=1 vitest"
+  },
+  "devDependencies": {
+    "@types/diff": "^5.0.2",
+    "@types/fs-extra": "^9.0.13",
+    "@types/gunzip-maybe": "^1.4.0",
+    "@types/prettier": "^2.7.2",
+    "@types/recursive-readdir": "^2.2.1",
+    "@types/tar-fs": "^2.0.1",
+    "oclif": "2.1.4",
+    "tempy": "^3.0.0",
+    "vitest": "^0.28.1"
+  },
+  "peerDependencies": {
+    "@remix-run/react": "^1.15.0",
+    "@shopify/hydrogen-react": "^2023.4.4",
+    "@shopify/remix-oxygen": "^1.1.0"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "3.3.1",
+    "@oclif/core": "2.1.4",
+    "@remix-run/dev": "1.15.0",
+    "@shopify/cli-kit": "3.46.3",
+    "@shopify/hydrogen-codegen": "^0.0.2",
+    "@shopify/mini-oxygen": "^1.6.0",
+    "diff": "^5.1.0",
+    "fast-glob": "^3.2.12",
+    "fs-extra": "^10.1.0",
+    "gunzip-maybe": "^1.4.2",
+    "prettier": "^2.8.4",
+    "recursive-readdir": "^2.2.3",
+    "tar-fs": "^2.1.1",
+    "typescript": "^4.9.5"
+  },
+  "bin": "dist/create-app.js",
+  "exports": {
+    "./package.json": "./package.json",
+    "./commands/hydrogen/init": {
+      "types": "./dist/commands/hydrogen/init.d.ts",
+      "default": "./dist/commands/hydrogen/init.js"
+    }
+  },
+  "files": [
+    "dist",
+    "oclif.manifest.json"
+  ],
+  "engines": {
+    "node": ">=16.13"
+  },
+  "oclif": {
+    "commands": "dist/commands",
+    "hooks": {
+      "init": "./dist/hooks/init.js"
+    },
+    "topics": {
+      "hydrogen": {
+        "description": "Hydrogen commands"
+      }
+    }
+  }
+}
